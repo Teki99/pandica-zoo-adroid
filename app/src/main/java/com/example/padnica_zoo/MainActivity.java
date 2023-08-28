@@ -5,6 +5,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.padnica_zoo.utils.AssetsUtils;
+import com.pandica_zoo.models.User;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
@@ -15,6 +19,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //get assets from db.json
+        String json = AssetsUtils.readJsonFile(this, "db.json");
+
+        Gson gson = new Gson();
+
+        User[] users = gson.fromJson(json, User[].class);
+
+        //login
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);

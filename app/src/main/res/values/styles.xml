@@ -17,4 +17,12 @@
         <item name="android:paddingTop">13dp</item>
         <item name="android:paddingBottom">13dp</item>
     </style>
+    <style name="RoundedEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/edit_text_outline</item>
+        <item name="android:textColor">@color/light_green</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+    </style>
 </resources>

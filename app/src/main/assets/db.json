@@ -1,0 +1,308 @@
+{
+  "users": [
+    {
+      "firstname": "Teodora",
+      "lastname": "Krstic",
+      "contact": "0654452190",
+      "address": "Milana Rakica 77",
+      "username": "teodora",
+      "password": "teodora",
+      "type": "visitor",
+      "packages": [
+        {
+          "id": 2,
+          "name": "Single ticket kid",
+          "price": 350,
+          "quantity": 1
+        },
+        {
+          "id": 5,
+          "name": "Group ticket kids",
+          "price": 250,
+          "quantity": 15
+        }
+      ],
+      "notifications": [
+        {
+          "packages": [
+            {
+              "name": "Single ticket adult",
+              "quantity": 1
+            },
+            {
+              "name": "Group ticket kids",
+              "quantity": 15
+            }
+          ],
+          "price": 3440,
+          "status": "accepted",
+          "dateOfConfirmation": "2023-06-24T13:56:17.004Z"
+        },
+        {
+          "packages": [
+            {
+              "name": "Single ticket adult",
+              "quantity": 3
+            }
+          ],
+          "price": 1485,
+          "status": "rejected",
+          "dateOfConfirmation": "2023-06-24T13:56:41.746Z"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "firstname": "Darinka",
+      "lastname": "Djurovic",
+      "contact": "065541278",
+      "address": "Cede Mijatovica 3",
+      "username": "darinka",
+      "password": "darinka",
+      "type": "employee",
+      "packages": [],
+      "notifications": [],
+      "id": 2
+    },
+    {
+      "firstname": "Milos",
+      "lastname": "Stojanovic",
+      "contact": "063256987",
+      "address": "Dimitrija Tucovica 2",
+      "username": "milos",
+      "password": "milos",
+      "type": "visitor",
+      "packages": [],
+      "notifications": [],
+      "id": 3
+    },
+    {
+      "firstname": "Jovan",
+      "lastname": "Djumic",
+      "contact": "064523655",
+      "address": "Bulevar Milajla Pupina 182",
+      "username": "jovan",
+      "password": "jovan",
+      "type": "employee",
+      "packages": [],
+      "notifications": [],
+      "id": 4
+    },
+    {
+      "firstname": "Ana",
+      "lastname": "Dackovic",
+      "contact": "062531448",
+      "address": "Beogradska 37",
+      "username": "ana",
+      "password": "ana",
+      "type": "visitor",
+      "packages": [],
+      "notifications": [],
+      "id": 5
+    }
+  ],
+  "packages": [
+    {
+      "name": "Single ticket adult",
+      "price": 550,
+      "description": "For ages 15 and above",
+      "promo": false,
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "name": "Single ticket kid",
+      "price": 350,
+      "description": "For ages 3 to 15",
+      "promo": false,
+      "quantity": 1,
+      "id": 2
+    },
+    {
+      "name": "Single ticket baby",
+      "price": 0,
+      "description": "For ages under 3",
+      "promo": false,
+      "quantity": 1,
+      "id": 3
+    },
+    {
+      "name": "Group ticket adult",
+      "price": 350,
+      "description": "Group of 15 adults and more",
+      "promo": false,
+      "quantity": 15,
+      "id": 4
+    },
+    {
+      "name": "Group ticket kids",
+      "price": 250,
+      "description": "Group of 15 kids and more",
+      "promo": false,
+      "quantity": 15,
+      "id": 5
+    },
+    {
+      "name": "Romantic package",
+      "price": 900,
+      "description": "For couples",
+      "promo": true,
+      "quantity": 1,
+      "id": 6
+    },
+    {
+      "name": "Family package",
+      "price": 1200,
+      "description": "For whole family of 4",
+      "promo": true,
+      "quantity": 1,
+      "id": 7
+    },
+    {
+      "name": "Company package",
+      "price": 300,
+      "description": "For company events",
+      "promo": true,
+      "quantity": 30,
+      "id": 8
+    }
+  ],
+  "events": [
+    {
+      "name": "Welcome to Christmas at the Zoo",
+      "date": "2022-12-01T18:25:43.511Z",
+      "description": "We are delighted to inform you about our Christmas at the Zoo theme. Don’t forget to come by our Zoo to see the animals in winter wonderland",
+      "numOfLikes": 60,
+      "image": "event1.jpg",
+      "id": 1
+    },
+    {
+      "name": "We have a new baby elephant",
+      "date": "2022-11-12T11:27:29.527Z",
+      "description": "We are delighted to inform you about our newest part of the animal family, baby elephant Slonce. He is born happy and healthy so when he is big enough don’t forget to come by our Zoo to meet him.",
+      "numOfLikes": 169,
+      "image": "event2.jpg",
+      "id": 2
+    },
+    {
+      "name": "Say hello to Rajko",
+      "date": "2022-09-23T12:45:08.429Z",
+      "description": "We are delighted to inform you about our newest member of the chimpanzee family. His name is Rajko and he is 26 years old. As he is on the older side he is quite slow but is full of charm. Don’t forget to visit him. ",
+      "numOfLikes": 82,
+      "image": "event3.jpg",
+      "id": 3
+    },
+    {
+      "name": "We have a new cafe",
+      "date": "2022-07-02T14:13:21.379Z",
+      "description": "We are delighted to inform you about our new cafe “Zebra espresso”. It is, as the name suggest, right next to the zebras. Make sure to stop by and have a drink while exploring the zoo.",
+      "numOfLikes": 36,
+      "image": "event4.jpg",
+      "id": 4
+    },
+    {
+      "name": "Changes to our petting zoo",
+      "date": "2022-05-01T09:53:24.275Z",
+      "description": "We are delighted to inform you about changes to our small petting zoo. We have new animals that love interacting with people and are very cuddly. Don’t forget to pay us a visit.",
+      "numOfLikes": 76,
+      "image": "event5.jpg",
+      "id": 5
+    }
+  ],
+  "animals": [
+    {
+      "name": "elephant",
+      "description": "Elephants are the largest existing land animals. Three living species are currently recognised: the African bush elephant, the African forest elephant, and the Asian elephant. They are the only surviving members of the family Elephantidae and the order Proboscidea. The order was formerly much more diverse during the Pleistocene, but most species became extinct during the Late Pleistocene epoch. Distinctive features of elephants include a long proboscis called a trunk, tusks, large ear flaps, pillar-like legs, and tough but sensitive skin. The trunk is used for breathing, bringing food and water to the mouth, and grasping objects. Tusks, which are derived from the incisor teeth, serve both as weapons and as tools for moving objects and digging. The large ear flaps assist in maintaining a constant body temperature as well as in communication. African elephants have larger ears and concave backs, whereas Asian elephants have smaller ears, and convex or level backs.",
+      "image": "elephant.jpg",
+      "comments": [
+        {
+          "username": "teodora",
+          "comment": "So cute!",
+          "date": "2022-05-01T09:53:24.275Z"
+        },
+        {
+          "username": "milos",
+          "comment": "Awsome!",
+          "date": "2022-04-04T12:23:24.275Z"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "chimpanzee",
+      "description": "",
+      "image": "chimpanzee.jpg",
+      "comments": [],
+      "id": 2
+    },
+    {
+      "name": "giraffe",
+      "description": "",
+      "image": "giraffe.jpg",
+      "comments": [],
+      "id": 3
+    },
+    {
+      "name": "macaw",
+      "description": "",
+      "image": "macaw.jpg",
+      "comments": [],
+      "id": 4
+    },
+    {
+      "name": "panda",
+      "description": "",
+      "image": "panda.jpg",
+      "comments": [
+        {
+          "username": "teodora",
+          "comment": "The panda is so cute!",
+          "date": "2023-06-25T14:43:52.000Z"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "name": "zebra",
+      "description": "",
+      "image": "zebra.jpg",
+      "comments": [],
+      "id": 6
+    },
+    {
+      "name": "seal",
+      "description": "",
+      "image": "seal.jpg",
+      "comments": [],
+      "id": 7
+    },
+    {
+      "name": "wild goat",
+      "description": "",
+      "image": "wild-goat.jpg",
+      "comments": [],
+      "id": 8
+    },
+    {
+      "name": "lion",
+      "description": "",
+      "image": "lion.jpg",
+      "comments": [],
+      "id": 9
+    },
+    {
+      "name": "bald eagle",
+      "description": "",
+      "image": "bald-eagle.jpg",
+      "comments": [],
+      "id": 10
+    },
+    {
+      "name": "tiger",
+      "description": "This is the tiger.",
+      "image": "tiger.jpg",
+      "comments": [],
+      "id": 11
+    }
+  ]
+}

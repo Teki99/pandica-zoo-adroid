@@ -15,7 +15,8 @@
         android:layout_width="210dp"
         android:layout_height="130dp"
         app:cardCornerRadius="100dp"
-        app:cardBackgroundColor="@color/transparent">
+        app:cardBackgroundColor="@color/transparent"
+        android:layout_marginBottom="32dp">
         <ImageView
             android:layout_width="210dp"
             android:layout_height="130dp"
@@ -31,9 +32,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please login"
-        android:textSize="18sp"
+        android:textSize="32sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:textColor="@color/white"
+        android:layout_marginBottom="32dp" />
 
     <EditText
         android:id="@+id/usernameEditText"
@@ -41,7 +43,9 @@
         android:layout_height="wrap_content"
         android:hint="Username"
         android:minHeight="48dp"
-        android:inputType="text" />
+        android:inputType="text"
+        style="@style/RoundedEditTextStyle"
+        android:layout_marginBottom="20dp"/>
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -49,7 +53,9 @@
         android:layout_height="wrap_content"
         android:hint="Password"
         android:inputType="textPassword"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        style="@style/RoundedEditTextStyle"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/loginButton"

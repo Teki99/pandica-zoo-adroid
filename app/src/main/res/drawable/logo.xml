@@ -9,7 +9,8 @@
                 android:width="3dp"/>
         </shape>
     </item>
-    <item>
+    <item             android:width="210dp"
+        android:height="130dp">
         <bitmap android:src="@drawable/logo_img" />
     </item>
 </layer-list>
