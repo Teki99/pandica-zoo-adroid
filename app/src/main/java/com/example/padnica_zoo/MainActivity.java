@@ -1,12 +1,20 @@
 package com.example.padnica_zoo;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.List;
 import com.google.gson.Gson;
-import com.padnica_zoo.utils.AssetsUtils;
+import com.pandica_zoo.models.Notification;
+import com.pandica_zoo.models.Package;
+import com.pandica_zoo.models.UserList;
+import com.pandica_zoo.utils.AssetsUtils;
 import com.pandica_zoo.models.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        User[] users = gson.fromJson(json, User[].class);
-
+        UserList userList = gson.fromJson(json, UserList.class);
+        List<User> users = userList.getUsers();
         //login
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
@@ -36,12 +44,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
+                // Authentication
+                for (User user : users) {
+                    if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                        // Save the logged user in SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("logged", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", user.getUsername());
+                        editor.apply();
 
-                // Perform login validation here
-                if (username.equals("your_username") && password.equals("your_password")) {
-                    // Login successful, you can navigate to the next activity
-                } else {
-                    // Login failed, show an error message
+                        // Login successful, navigate to the Home activity
+                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                }
+                // Failed log in
+                SharedPreferences sharedPreferences = getSharedPreferences("logged", Context.MODE_PRIVATE);
+                String usernameOfLogged = sharedPreferences.getString("username", "");
+                if(usernameOfLogged==null){
+                    Toast.makeText(getApplicationContext(), "Incorrect username or password!", Toast.LENGTH_LONG).show();
                 }
             }
         });

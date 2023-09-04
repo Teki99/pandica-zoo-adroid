@@ -1,4 +1,4 @@
-package com.padnica_zoo.utils;
+package com.pandica_zoo.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
