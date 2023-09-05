@@ -16,14 +16,14 @@ import com.example.padnica_zoo.databinding.ActivityHomeBinding;
 public class HomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-private ActivityHomeBinding binding;
+    private ActivityHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-     binding = ActivityHomeBinding.inflate(getLayoutInflater());
-     setContentView(binding.getRoot());
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarHome.toolbar);
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
