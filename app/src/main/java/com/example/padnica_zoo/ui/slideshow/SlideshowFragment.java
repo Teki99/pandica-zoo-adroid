@@ -6,30 +6,43 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.padnica_zoo.R;
 import com.example.padnica_zoo.databinding.FragmentSlideshowBinding;
 
 public class SlideshowFragment extends Fragment {
 
-private FragmentSlideshowBinding binding;
+    private SlideshowViewModel viewModel;
+    private ViewPager2 viewPager;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        viewPager = root.findViewById(R.id.viewPager2);
 
-    binding = FragmentSlideshowBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        // Initialize ViewModel
+        viewModel = new ViewModelProvider(this).get(SlideshowViewModel.class);
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        // Set up ViewPager2 and Adapter
+        SlideshowPagerAdapter pagerAdapter = new SlideshowPagerAdapter(this);
+        viewPager.setAdapter(pagerAdapter);
+
+
+        // Observe the current image index from the ViewModel
+        viewModel.getCurrentImageIndex().observe(getViewLifecycleOwner(), index -> {
+            viewPager.setCurrentItem(index, true); // Auto-scroll to the current image
+        });
+
         return root;
     }
-
-@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }
