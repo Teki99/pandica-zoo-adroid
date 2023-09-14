@@ -29,9 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         //get assets from db.json
         String json = AssetsUtils.readJsonFile(this, "db.json");
-
         Gson gson = new Gson();
-
         UserList userList = gson.fromJson(json, UserList.class);
         List<User> users = userList.getUsers();
         //login

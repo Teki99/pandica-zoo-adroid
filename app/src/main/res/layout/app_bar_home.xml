@@ -15,8 +15,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width = "match_parent"
-            android:background="?attr/colorPrimary"
-              app:popupTheme="@style/Theme.PandicaZoo.PopupOverlay"
+            android:background="@color/dark_green"
+            app:popupTheme="@style/Theme.PandicaZoo.PopupOverlay"
             android:layout_height = "?attr/actionBarSize" />
 
   </com.google.android.material.appbar.AppBarLayout>
