@@ -6,11 +6,18 @@
         <item name="android:fontFamily">@font/irish_grover</item>
     </style>
 
-    <style name="Theme.PandicaZoo" parent="Base.Theme.PandicaZoo" />
+    <style name="Theme.PandicaZoo" parent="Base.Theme.PandicaZoo">
+        <item name="android:fontFamily">@font/irish_grover</item>
+    </style>
     <style name="Theme.PandicaZoo.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/irish_grover</item>
     </style>
-    <style name="Theme.PandicaZoo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.PandicaZoo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.PandicaZoo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:fontFamily">@font/irish_grover</item>
+    </style>
+    <style name="Theme.PandicaZoo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:fontFamily">@font/irish_grover</item>
+    </style>
 </resources>
