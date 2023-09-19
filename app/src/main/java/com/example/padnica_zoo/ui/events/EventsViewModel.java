@@ -22,11 +22,15 @@ public class EventsViewModel extends AndroidViewModel {
 
     public EventsViewModel(@NonNull Application application) {
         super(application);
+
         //get the events from db.json
-        String json = AssetsUtils.readJsonFile(application, "db.json");
+        String json = AssetsUtils.readJsonFromFile(application);
         Gson gson = new Gson();
         EventList eventList = gson.fromJson(json, EventList.class);
         events.setValue(eventList.getEvents());
+
+
+
     }
 
     public MutableLiveData<List<Event>> getEvents() {

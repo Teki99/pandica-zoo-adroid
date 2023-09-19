@@ -46,7 +46,7 @@ public class EventsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_events, container, false);
         viewModel = new EventsViewModel(this.getActivity().getApplication());
 
-        String json = AssetsUtils.readJsonFile(this.getActivity(), "db.json");
+        String json = AssetsUtils.readJsonFromFile(this.getActivity());
         gson = new Gson();
         //jsonFile = gson.fromJson(json,JsonFile.class);
 
@@ -165,15 +165,21 @@ public class EventsFragment extends Fragment {
                 }
                 //change the event in the jsonFile
                 jsonFile.getEventsList().getEvents().set(event.getId()-1,event);
-                String json = gson.toJson(jsonFile.getUsersList());
-                json+=gson.toJson(jsonFile.getPackagesList());
-                json+=gson.toJson(jsonFile.getEventsList());
-                json+=gson.toJson(jsonFile.getAnimalsList());
+                String json1 = gson.toJson(jsonFile.getUsersList());
+                String json2 = gson.toJson(jsonFile.getPackagesList());
+                String json3 = gson.toJson(jsonFile.getEventsList());
+                String json4 = gson.toJson(jsonFile.getAnimalsList());
+
+                String json = json1.substring(0,json1.length()-1) + ","
+                        + json2.substring(1,json2.length()-1) + ","
+                        + json3.substring(1,json3.length()-1) + ","
+                        + json4.substring(1,json4.length());
+
                 //write the whole jsonFile, but will it overwrite the existing db.json?
                 //String json = gson.toJson(jsonFile);
                 String filename = "db.json";
                 if (AssetsUtils.isValidJson(json)) {
-                    boolean success = AssetsUtils.writeJsonFile(application, filename, json);
+                    boolean success = AssetsUtils.writeJsonFile(application, json);
                     Log.d("WriteJsonFile", "Write success: " + success);
                     if (success) {
                         // File was written successfully.
