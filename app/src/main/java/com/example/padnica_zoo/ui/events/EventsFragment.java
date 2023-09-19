@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +19,45 @@ import com.bumptech.glide.Glide;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.padnica_zoo.R;
+import com.google.gson.Gson;
+import com.pandica_zoo.models.AnimalList;
 import com.pandica_zoo.models.Event;
+import com.pandica_zoo.models.EventList;
+import com.pandica_zoo.models.JsonFile;
+import com.pandica_zoo.models.PackageList;
+import com.pandica_zoo.models.User;
+import com.pandica_zoo.models.UserList;
+import com.pandica_zoo.utils.AssetsUtils;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 
 public class EventsFragment extends Fragment {
     private EventsViewModel viewModel;
 
+    //private String json;
+    private Gson gson;
+    private JsonFile jsonFile;
     private boolean wasLiked[];
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_events, container, false);
         viewModel = new EventsViewModel(this.getActivity().getApplication());
+
+        String json = AssetsUtils.readJsonFile(this.getActivity(), "db.json");
+        gson = new Gson();
+        //jsonFile = gson.fromJson(json,JsonFile.class);
+
+
+        UserList userList = gson.fromJson(json, UserList.class);
+        EventList eventList = gson.fromJson(json, EventList.class);
+        PackageList packageList = gson.fromJson(json, PackageList.class);
+        AnimalList animalList = gson.fromJson(json, AnimalList.class);
+        jsonFile=new JsonFile(userList,eventList,packageList,animalList);
+        //List<User> users = userList.getUsers();
+
 
         wasLiked = new boolean[viewModel.getEventsSize()];
 
@@ -113,7 +142,7 @@ public class EventsFragment extends Fragment {
 
         //LIKE BUTTON
         ImageButton likeButton = new ImageButton(this.getActivity().getApplication());
-        //need it here to be visible!
+        //!!!need it here to be visible!
         TextView numOfLikes = new TextView(application);
         likeButton.setImageResource(R.drawable.thumb_up);
         likeButton.setBackgroundColor(ContextCompat.getColor(application, R.color.dark_green));
@@ -126,7 +155,6 @@ public class EventsFragment extends Fragment {
                     event.setNumOfLikes(event.getNumOfLikes()+1);
                     likeButton.setColorFilter(ContextCompat.getColor(application, R.color.light_green), PorterDuff.Mode.SRC_ATOP);
                     wasLiked[event.getId()-1]=true;
-                    //TODO: implement the changes in the db.json, with the write in the json!
                 }
                 else //UNLIKE
                 {
@@ -135,9 +163,30 @@ public class EventsFragment extends Fragment {
                     likeButton.setColorFilter(ContextCompat.getColor(application, R.color.white),PorterDuff.Mode.SRC_ATOP);
                     wasLiked[event.getId()-1]=false;
                 }
+                //change the event in the jsonFile
+                jsonFile.getEventsList().getEvents().set(event.getId()-1,event);
+                String json = gson.toJson(jsonFile.getUsersList());
+                json+=gson.toJson(jsonFile.getPackagesList());
+                json+=gson.toJson(jsonFile.getEventsList());
+                json+=gson.toJson(jsonFile.getAnimalsList());
+                //write the whole jsonFile, but will it overwrite the existing db.json?
+                //String json = gson.toJson(jsonFile);
+                String filename = "db.json";
+                if (AssetsUtils.isValidJson(json)) {
+                    boolean success = AssetsUtils.writeJsonFile(application, filename, json);
+                    Log.d("WriteJsonFile", "Write success: " + success);
+                    if (success) {
+                        // File was written successfully.
+                    } else {
+                        // There was an error writing the file.
+                    }
+                }
+
 
             }
         });
+
+
         likeButton.setId(View.generateViewId());
 
         RelativeLayout.LayoutParams likeButtonParams = new RelativeLayout.LayoutParams(
