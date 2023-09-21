@@ -28,9 +28,11 @@ import com.pandica_zoo.models.PackageList;
 import com.pandica_zoo.models.User;
 import com.pandica_zoo.models.UserList;
 import com.pandica_zoo.utils.AssetsUtils;
+import com.pandica_zoo.utils.TinyDB;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventsFragment extends Fragment {
@@ -39,27 +41,18 @@ public class EventsFragment extends Fragment {
     //private String json;
     private Gson gson;
     private JsonFile jsonFile;
-    private boolean wasLiked[];
-
+    private ArrayList<Boolean> wasLiked;
+    private TinyDB tinydb;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_events, container, false);
         viewModel = new EventsViewModel(this.getActivity().getApplication());
 
-        String json = AssetsUtils.readJsonFromFile(this.getActivity());
+        jsonFile = AssetsUtils.readJsonFromFile(this.getActivity());
         gson = new Gson();
-        //jsonFile = gson.fromJson(json,JsonFile.class);
 
-
-        UserList userList = gson.fromJson(json, UserList.class);
-        EventList eventList = gson.fromJson(json, EventList.class);
-        PackageList packageList = gson.fromJson(json, PackageList.class);
-        AnimalList animalList = gson.fromJson(json, AnimalList.class);
-        jsonFile=new JsonFile(userList,eventList,packageList,animalList);
-        //List<User> users = userList.getUsers();
-
-
-        wasLiked = new boolean[viewModel.getEventsSize()];
+        tinydb = new TinyDB(this.getActivity());
+        wasLiked = tinydb.getListBoolean("wasLiked");
 
         LinearLayout containerLayout = root.findViewById(R.id.packages);
 
@@ -140,58 +133,46 @@ public class EventsFragment extends Fragment {
         );
         descriptionParams.addRule(RelativeLayout.BELOW,image.getId());
 
-        //LIKE BUTTON
+        //-----------------------------------LIKE BUTTON--------------------------------------------
         ImageButton likeButton = new ImageButton(this.getActivity().getApplication());
         //!!!need it here to be visible!
         TextView numOfLikes = new TextView(application);
         likeButton.setImageResource(R.drawable.thumb_up);
-        likeButton.setBackgroundColor(ContextCompat.getColor(application, R.color.dark_green));
+        if(!wasLiked.get(event.getId()-1)) //not liked
+        {
+            likeButton.setColorFilter(ContextCompat.getColor(application, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        }
+        else
+        {
+            likeButton.setColorFilter(ContextCompat.getColor(application, R.color.light_green), PorterDuff.Mode.SRC_ATOP);
+        }
+            likeButton.setBackgroundColor(ContextCompat.getColor(application, R.color.dark_green));
         likeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(!wasLiked[event.getId()-1]) //LIKE
+                if(!wasLiked.get(event.getId()-1)) //LIKE
                 {
                     numOfLikes.setText(""+(event.getNumOfLikes()+1)+"");
                     event.setNumOfLikes(event.getNumOfLikes()+1);
                     likeButton.setColorFilter(ContextCompat.getColor(application, R.color.light_green), PorterDuff.Mode.SRC_ATOP);
-                    wasLiked[event.getId()-1]=true;
+                    wasLiked.set(event.getId()-1,true);
                 }
                 else //UNLIKE
                 {
                     numOfLikes.setText(""+(event.getNumOfLikes()-1)+"");
                     event.setNumOfLikes(event.getNumOfLikes()-1);
                     likeButton.setColorFilter(ContextCompat.getColor(application, R.color.white),PorterDuff.Mode.SRC_ATOP);
-                    wasLiked[event.getId()-1]=false;
+                    wasLiked.set(event.getId()-1,false);
                 }
+                //update wasLiked
+                tinydb.putListBoolean("wasLiked", wasLiked);
                 //change the event in the jsonFile
                 jsonFile.getEventsList().getEvents().set(event.getId()-1,event);
-                String json1 = gson.toJson(jsonFile.getUsersList());
-                String json2 = gson.toJson(jsonFile.getPackagesList());
-                String json3 = gson.toJson(jsonFile.getEventsList());
-                String json4 = gson.toJson(jsonFile.getAnimalsList());
-
-                String json = json1.substring(0,json1.length()-1) + ","
-                        + json2.substring(1,json2.length()-1) + ","
-                        + json3.substring(1,json3.length()-1) + ","
-                        + json4.substring(1,json4.length());
-
-                //write the whole jsonFile, but will it overwrite the existing db.json?
-                //String json = gson.toJson(jsonFile);
-                String filename = "db.json";
-                if (AssetsUtils.isValidJson(json)) {
-                    boolean success = AssetsUtils.writeJsonFile(application, json);
-                    Log.d("WriteJsonFile", "Write success: " + success);
-                    if (success) {
-                        // File was written successfully.
-                    } else {
-                        // There was an error writing the file.
-                    }
-                }
-
+                //update json file
+                AssetsUtils.updateJsonFile(jsonFile,application);
 
             }
         });
-
 
         likeButton.setId(View.generateViewId());
 
@@ -201,7 +182,7 @@ public class EventsFragment extends Fragment {
         );
         likeButtonParams.addRule(RelativeLayout.BELOW,description.getId());
 
-        //NUMBER OF LIKES
+        //--------------------------------NUMBER OF LIKES-------------------------------------------
         numOfLikes.setText(""+event.getNumOfLikes()+"");
         numOfLikes.setId(View.generateViewId());
         numOfLikes.setTextColor(ContextCompat.getColor(application, R.color.white));

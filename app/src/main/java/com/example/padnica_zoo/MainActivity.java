@@ -18,13 +18,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
+import com.pandica_zoo.models.Event;
+import com.pandica_zoo.models.EventList;
 import com.pandica_zoo.models.Notification;
 import com.pandica_zoo.models.Package;
 import com.pandica_zoo.models.UserList;
 import com.pandica_zoo.utils.AssetsUtils;
 import com.pandica_zoo.models.User;
+import com.pandica_zoo.utils.TinyDB;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //get assets from db.json
-        String json = AssetsUtils.readJsonFile(this, "db.json");
+        String json = AssetsUtils.readJsonFromAssetsFile(this, "db.json");
         Gson gson = new Gson();
         UserList userList = gson.fromJson(json, UserList.class);
         List<User> users = userList.getUsers();
@@ -52,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //liked events
+        EventList eventList = gson.fromJson(json, EventList.class);
+        List<Event> events = eventList.getEvents();
+        TinyDB tinydb = new TinyDB(this);
+        ArrayList<Boolean> wasLiked = new ArrayList<Boolean>(events.size());
+        for(int i=0;i<events.size();i++)
+        {
+            wasLiked.add(false);
+        }
+        tinydb.putListBoolean("wasLiked", wasLiked);
 
         //login
         usernameEditText = findViewById(R.id.usernameEditText);

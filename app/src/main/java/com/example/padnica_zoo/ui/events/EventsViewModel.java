@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.google.gson.Gson;
 import com.pandica_zoo.models.Event;
 import com.pandica_zoo.models.EventList;
+import com.pandica_zoo.models.JsonFile;
 import com.pandica_zoo.models.User;
 import com.pandica_zoo.models.UserList;
 import com.pandica_zoo.utils.AssetsUtils;
@@ -22,30 +23,20 @@ public class EventsViewModel extends AndroidViewModel {
 
     public EventsViewModel(@NonNull Application application) {
         super(application);
-
-        //get the events from db.json
-        String json = AssetsUtils.readJsonFromFile(application);
-        Gson gson = new Gson();
-        EventList eventList = gson.fromJson(json, EventList.class);
-        events.setValue(eventList.getEvents());
-
-
-
+        //get the events from database.json file
+        JsonFile jsonFile = AssetsUtils.readJsonFromFile(application);
+        events.setValue(jsonFile.getEventsList().getEvents());
     }
 
     public MutableLiveData<List<Event>> getEvents() {
         return events;
     }
-
     public int getEventsSize()
     {
         return events.getValue().size();
     }
-
     public Event getEventAtIndex(int i)
     {
         return events.getValue().get(i);
     }
-
-
 }
