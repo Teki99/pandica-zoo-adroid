@@ -1,5 +1,7 @@
 package com.pandica_zoo.models;
 
+import java.util.List;
+
 public class User {
     private String firstname;
     private String lastname;
@@ -8,12 +10,11 @@ public class User {
     private String contact;
     private String address;
     private String type; //visitor, employee
-    private Package[] packages;
-    private Notification[] notifications;
+    private List<Package> packages;
+    private List<Notification> notifications;
     private Integer id;
 
-    //Constructor
-    public User(String firstname, String lastname, String username, String password, String contact, String address, String type, Package[] packages, Notification[] notifications, Integer id) {
+    public User(String firstname, String lastname, String username, String password, String contact, String address, String type, List<Package> packages, List<Notification> notifications, Integer id) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -26,7 +27,6 @@ public class User {
         this.id = id;
     }
 
-    // Getters and Setters for the fields
     public String getFirstname() {
         return firstname;
     }
@@ -83,19 +83,19 @@ public class User {
         this.type = type;
     }
 
-    public Package[] getPackages() {
+    public List<Package> getPackages() {
         return packages;
     }
 
-    public void setPackages(Package[] packages) {
+    public void setPackages(List<Package> packages) {
         this.packages = packages;
     }
 
-    public Notification[] getNotifications() {
+    public List<Notification> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(Notification[] notifications) {
+    public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
     }
 
@@ -106,5 +106,4 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
-
 }

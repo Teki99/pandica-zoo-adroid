@@ -1,6 +1,7 @@
 package com.pandica_zoo.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.util.Log;
 
@@ -9,6 +10,7 @@ import com.pandica_zoo.models.AnimalList;
 import com.pandica_zoo.models.EventList;
 import com.pandica_zoo.models.JsonFile;
 import com.pandica_zoo.models.PackageList;
+import com.pandica_zoo.models.User;
 import com.pandica_zoo.models.UserList;
 
 import java.io.File;
@@ -18,6 +20,8 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -142,5 +146,25 @@ public class AssetsUtils {
                 Log.e("WriteJsonFile", "Write success: " + success);
             }
         }
+    }
+
+    public static User getLoggedUser(Context context)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("logged", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "none"); //I don't know what to put in default
+        if(username != "none") //someone is logged in
+        {
+            //get jsonFile
+            JsonFile jsonFile = AssetsUtils.readJsonFromFile(context);
+            List<User> users = jsonFile.getUsersList().getUsers();
+            for(int i=0;i<users.size();i++)
+            {
+                if(users.get(i).getUsername().equals(username)) //the logged user
+                {
+                    return users.get(i);
+                }
+            }
+        }
+        return null;
     }
 }

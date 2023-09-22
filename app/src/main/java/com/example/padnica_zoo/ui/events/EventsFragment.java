@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import com.example.padnica_zoo.R;
 import com.google.gson.Gson;
@@ -37,9 +39,6 @@ import java.util.List;
 
 public class EventsFragment extends Fragment {
     private EventsViewModel viewModel;
-
-    //private String json;
-    private Gson gson;
     private JsonFile jsonFile;
     private ArrayList<Boolean> wasLiked;
     private TinyDB tinydb;
@@ -47,25 +46,22 @@ public class EventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_events, container, false);
         viewModel = new EventsViewModel(this.getActivity().getApplication());
-
         jsonFile = AssetsUtils.readJsonFromFile(this.getActivity());
-        gson = new Gson();
 
         tinydb = new TinyDB(this.getActivity());
         wasLiked = tinydb.getListBoolean("wasLiked");
 
-        LinearLayout containerLayout = root.findViewById(R.id.packages);
-
+        LinearLayout containerLayout = root.findViewById(R.id.events);
         for (int i=0;i<viewModel.getEventsSize();i++) {
             RelativeLayout relativeLayout = createRelativeLayoutWithTextView(this.getActivity().getApplication(), viewModel.getEventAtIndex(i));
             containerLayout.addView(relativeLayout);
         }
-
         return root;
     }
 
     private RelativeLayout createRelativeLayoutWithTextView(Application application, Event event) {
         RelativeLayout relativeLayout = new RelativeLayout(application);
+        Typeface customTypeface = ResourcesCompat.getFont(application, R.font.irish_grover);
         relativeLayout.setBackgroundColor(ContextCompat.getColor(application, R.color.dark_green));
 
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
@@ -79,7 +75,7 @@ public class EventsFragment extends Fragment {
         date.setText(event.getDate());
         date.setId(View.generateViewId());
         date.setTextColor(ContextCompat.getColor(application, R.color.light_green));
-
+        date.setTypeface(customTypeface);
 
         RelativeLayout.LayoutParams dateParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -92,6 +88,7 @@ public class EventsFragment extends Fragment {
         name.setText(event.getName());
         name.setId(View.generateViewId());
         name.setTextColor(ContextCompat.getColor(application, R.color.white));
+        name.setTypeface(customTypeface);
 
         RelativeLayout.LayoutParams nameParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -126,6 +123,7 @@ public class EventsFragment extends Fragment {
         description.setText(event.getDescription());
         description.setId(View.generateViewId());
         description.setTextColor(ContextCompat.getColor(application, R.color.white));
+        description.setTypeface(customTypeface);
 
         RelativeLayout.LayoutParams descriptionParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -186,6 +184,7 @@ public class EventsFragment extends Fragment {
         numOfLikes.setText(""+event.getNumOfLikes()+"");
         numOfLikes.setId(View.generateViewId());
         numOfLikes.setTextColor(ContextCompat.getColor(application, R.color.white));
+        numOfLikes.setTypeface(customTypeface);
 
         RelativeLayout.LayoutParams numOfLikesParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -205,33 +204,3 @@ public class EventsFragment extends Fragment {
         return relativeLayout;
     }
 }
-
-    /*@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_events, container, false);
-        viewModel = new EventsViewModel(this.getActivity().getApplication());
-
-        LinearLayout layout = root.findViewById(R.id.packages);
-
-        for (int i = 0; i < viewModel.getEventsSize(); i++) {
-
-            RelativeLayout card = new RelativeLayout(this.getActivity().getApplication());
-            RelativeLayout.LayoutParams cardParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.MATCH_PARENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT
-            );
-
-            // Date TextView
-            TextView date = new TextView(this.getActivity().getApplication());
-            date.setText(viewModel.getEventAtIndex(i).getDate());
-            date.setId(View.generateViewId()); // Generate a unique ID for this view
-            card.addView(date, cardParams);
-
-            // Uncomment and add other views like name, image, description, likeButton, numOfLikes as needed
-
-            // Add the card to the parent LinearLayout
-            layout.addView(card, cardParams);
-        }
-
-        return root;
-    }*/

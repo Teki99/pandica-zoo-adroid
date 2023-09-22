@@ -4,9 +4,7 @@ public class Package {
     private Integer id;
     private String name;
     private Integer price;
-
     private String description;
-
     private Boolean promo;
     private Integer quantity;
 
