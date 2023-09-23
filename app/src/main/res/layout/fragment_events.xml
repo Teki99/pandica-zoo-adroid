@@ -11,18 +11,18 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
-            android:id="@+id/packages"
+            android:id="@+id/events"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints"
-            android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            tools:context=".ui.events.EventsFragment">
-        </LinearLayout>
+            android:orientation="vertical"
+            tools:context=".ui.events.EventsFragment"
+            tools:ignore="MissingConstraints"></LinearLayout>
     </ScrollView>
 
 
