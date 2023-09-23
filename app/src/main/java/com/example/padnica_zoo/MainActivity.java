@@ -79,11 +79,14 @@ public class MainActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 // Authentication
+                SharedPreferences sharedPreferences = getSharedPreferences("logged", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("username", "");
+                editor.apply();
                 for (User user : users) {
                     if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
                         // Save the logged user in SharedPreferences
-                        SharedPreferences sharedPreferences = getSharedPreferences("logged", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
                         editor.putString("username", user.getUsername());
                         editor.apply();
 
@@ -93,9 +96,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 // Failed log in
-                SharedPreferences sharedPreferences = getSharedPreferences("logged", Context.MODE_PRIVATE);
                 String usernameOfLogged = sharedPreferences.getString("username", "");
-                if(usernameOfLogged==null){
+                if(usernameOfLogged.equals("")){
                     Toast.makeText(getApplicationContext(), "Incorrect username or password!", Toast.LENGTH_LONG).show();
                 }
             }
