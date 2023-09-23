@@ -23,4 +23,10 @@
         android:label="@string/menu_events"
         tools:layout="@layout/fragment_events" />
 
+    <fragment
+        android:id="@+id/nav_animals"
+        android:name="com.example.padnica_zoo.ui.animals.AnimalsFragment"
+        android:label="Animals"
+        tools:layout="@layout/fragment_animals" />
+
 </navigation>

@@ -1,42 +1,110 @@
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.home.HomeFragment" >
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="center">
 
+        <FrameLayout
+            android:id="@+id/slideshow_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/text_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text="Welcome to Pandica ZOO !"/>
+
+        <ImageView
+            android:id="@+id/small_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/lazy_panda_thumbnail"
+            android:layout_gravity="center" />
+
+        <!-- Green background area -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="120dp"
+            android:orientation="vertical"
+            android:background="@color/dark_green"
+        android:layout_margin="16dp">
 
-            <FrameLayout
-                android:id="@+id/slideshow_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints" />
-        </LinearLayout>
-
-
-        <LinearLayout
+        <!-- White text in the green area -->
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="wrap_content"
+            android:text="We are open every day"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+        android:gravity="center" />
+            <ImageView
+                android:id="@+id/small_clock"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/zebra"
+                android:layout_gravity="center" />
             <TextView
-                android:id="@+id/text_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                android:text="From 9:00 to 18:00"
+                android:textSize="18sp"
+                android:textColor="@color/light_green"
+                android:gravity="center" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Come and visist us"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center" />
+
+        <!-- Centered picture in the green area -->
+
+
         </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            >
+
+
+            <!-- Text in the white space with green border -->
+            <TextView
+                android:id="@+id/map_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Here is a map of our Zoo"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+            android:gravity="center" />
+
+
+
+
+        </FrameLayout>
+        <ImageView
+            android:id="@+id/map_id"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:src="@drawable/map"
+            android:layout_gravity="center" />
     </LinearLayout>
+    </ScrollView>
 </layout>

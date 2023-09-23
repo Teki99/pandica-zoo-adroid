@@ -14,5 +14,8 @@
         <item
             android:id="@+id/nav_events"
             android:title="@string/menu_events" />
+        <item
+            android:id="@+id/nav_animals"
+            android:title="Animals" />
     </group>
 </menu>
