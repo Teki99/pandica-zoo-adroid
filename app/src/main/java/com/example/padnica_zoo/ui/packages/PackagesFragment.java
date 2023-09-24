@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -54,12 +55,14 @@ public class PackagesFragment extends Fragment {
     }
 
     private RelativeLayout createRelativeLayoutWithTextView(Application application, Package pack) {
-        RelativeLayout relativeLayout = new RelativeLayout(application);
         Typeface customTypeface = ResourcesCompat.getFont(application, R.font.irish_grover);
-        relativeLayout.setBackgroundColor(ContextCompat.getColor(application, R.color.dark_green));
+        Drawable outlineLightGreen = ContextCompat.getDrawable(application, R.drawable.light_green_outline);
 
+        RelativeLayout relativeLayout = new RelativeLayout(application);
+        relativeLayout.setBackgroundResource(R.drawable.dark_green_outline);
+        relativeLayout.setBackgroundTintList(ContextCompat.getColorStateList(application, R.color.dark_green));
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                800,550
+                800,600
         );
         layoutParams.topMargin = getResources().getDimensionPixelSize(R.dimen.top_margin);
         layoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.bottom_margin);
@@ -70,9 +73,10 @@ public class PackagesFragment extends Fragment {
         name.setText(pack.getName());
         name.setId(View.generateViewId());
         name.setTextColor(ContextCompat.getColor(application, R.color.light_green));
-        name.setBackgroundColor(ContextCompat.getColor(application, R.color.white));
+        name.setBackground(outlineLightGreen);
         name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         name.setTypeface(customTypeface);
+        name.setPadding(20,10,20,10);
 
         RelativeLayout.LayoutParams nameParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -119,10 +123,11 @@ public class PackagesFragment extends Fragment {
 
         //ADD TO CART BUTTON
         Button addToCartButton = new Button(this.getActivity().getApplication());
-        addToCartButton.setBackgroundColor(ContextCompat.getColor(application, R.color.light_green));
+        addToCartButton.setBackgroundResource(R.drawable.rounded_light_button_background);
         addToCartButton.setTextColor(ContextCompat.getColor(application, R.color.white));
         addToCartButton.setText(R.string.add_to_cart_button);
         addToCartButton.setTypeface(customTypeface);
+        addToCartButton.setPadding(10,10,10,10);
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

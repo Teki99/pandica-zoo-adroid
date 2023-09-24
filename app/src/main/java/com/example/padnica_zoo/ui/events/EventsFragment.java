@@ -1,13 +1,9 @@
 package com.example.padnica_zoo.ui.events;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,21 +18,12 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import com.example.padnica_zoo.R;
-import com.google.gson.Gson;
-import com.pandica_zoo.models.AnimalList;
 import com.pandica_zoo.models.Event;
-import com.pandica_zoo.models.EventList;
 import com.pandica_zoo.models.JsonFile;
-import com.pandica_zoo.models.PackageList;
-import com.pandica_zoo.models.User;
-import com.pandica_zoo.models.UserList;
 import com.pandica_zoo.utils.AssetsUtils;
 import com.pandica_zoo.utils.TinyDB;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EventsFragment extends Fragment {
     private EventsViewModel viewModel;
@@ -136,7 +123,7 @@ public class EventsFragment extends Fragment {
         ImageButton likeButton = new ImageButton(this.getActivity().getApplication());
         //!!!need it here to be visible!
         TextView numOfLikes = new TextView(application);
-        likeButton.setImageResource(R.drawable.thumb_up);
+        likeButton.setImageResource(R.drawable.ic_like);
         if(!wasLiked.get(event.getId()-1)) //not liked
         {
             likeButton.setColorFilter(ContextCompat.getColor(application, R.color.white), PorterDuff.Mode.SRC_ATOP);
