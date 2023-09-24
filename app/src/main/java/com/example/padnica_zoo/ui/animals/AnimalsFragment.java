@@ -49,12 +49,15 @@ public class AnimalsFragment extends Fragment {
         return root;
     }
     private RelativeLayout createRelativeLayoutWithTextView(Application application, Animal animal) {
-        RelativeLayout relativeLayout = new RelativeLayout(application);
         Typeface customTypeface = ResourcesCompat.getFont(application, R.font.irish_grover);
-        relativeLayout.setBackgroundColor(ContextCompat.getColor(application, R.color.dark_green));
+
+        RelativeLayout relativeLayout = new RelativeLayout(application);
+        relativeLayout.setBackgroundResource(R.drawable.dark_green_outline);
+        relativeLayout.setBackgroundTintList(ContextCompat.getColorStateList(application, R.color.dark_green));
 
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                800,1200
+                800,
+                1100
         );
         layoutParams.topMargin = getResources().getDimensionPixelSize(R.dimen.top_margin);
         layoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.bottom_margin);
@@ -63,11 +66,11 @@ public class AnimalsFragment extends Fragment {
         TextView name = new TextView(application);
         Log.i("nameTag", animal.getName());
 
-        name.setText(animal.getName());
+        name.setText("The "+animal.getName());
         name.setId(View.generateViewId());
         name.setTextColor(ContextCompat.getColor(application, R.color.white));
         name.setTypeface(customTypeface);
-        name.setTextSize(45);
+        name.setTextSize(34);
 
         RelativeLayout.LayoutParams nameParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -75,6 +78,7 @@ public class AnimalsFragment extends Fragment {
         );
         nameParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         nameParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
         //IMAGE
         ImageView image = new ImageView(this.getActivity());
         int dotIndex = animal.getImage().lastIndexOf(".");
@@ -86,7 +90,7 @@ public class AnimalsFragment extends Fragment {
                     .load(resourceId)
                     .into(image);
         } else {
-            // Handle the case where the resource does not exist
+            Log.e("Image", animal.getName()+" resource doesn't exist");
         }
         image.setId(View.generateViewId());
 
@@ -95,7 +99,6 @@ public class AnimalsFragment extends Fragment {
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
         imageParams.addRule(RelativeLayout.BELOW,name.getId());
-
 
         relativeLayout.addView(name, nameParams);
         relativeLayout.addView(image, imageParams);

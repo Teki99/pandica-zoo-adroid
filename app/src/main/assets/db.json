@@ -279,7 +279,7 @@
     {
       "name": "wild goat",
       "description": "",
-      "image": "wild-goat.jpg",
+      "image": "wild_goat.jpg",
       "comments": [],
       "id": 8
     },
@@ -293,7 +293,7 @@
     {
       "name": "bald eagle",
       "description": "",
-      "image": "bald-eagle.jpg",
+      "image": "bald_eagle.jpg",
       "comments": [],
       "id": 10
     },
