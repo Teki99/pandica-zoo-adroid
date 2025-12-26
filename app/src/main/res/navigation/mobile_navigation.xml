@@ -32,9 +32,21 @@
         tools:layout="@layout/fragment_events" />
 
     <fragment
+        android:id="@+id/nav_animals"
+        android:name="com.example.padnica_zoo.ui.animals.AnimalsFragment"
+        android:label="Animals"
+        tools:layout="@layout/fragment_animals" />
+
+    <fragment
         android:id="@+id/nav_cart"
         android:name="com.example.padnica_zoo.ui.cart.CartFragment"
         android:label="@string/menu_cart"
         tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.padnica_zoo.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

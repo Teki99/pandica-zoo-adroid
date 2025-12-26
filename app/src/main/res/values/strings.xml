@@ -17,4 +17,5 @@
     <string name="menu_packages">Packages</string>
     <string name="menu_events">Events</string>
     <string name="menu_cart">Cart</string>
+    <string name="menu_profile">Profile</string>
 </resources>

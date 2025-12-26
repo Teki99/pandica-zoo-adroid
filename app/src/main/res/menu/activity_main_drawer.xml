@@ -13,6 +13,14 @@
         <item
             android:id="@+id/nav_events"
             android:title="@string/menu_events" />
+        <item
+            android:id="@+id/nav_animals"
+            android:title="Animals" />
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/menu_profile" />
 
         <item
             android:id="@+id/nav_cart"

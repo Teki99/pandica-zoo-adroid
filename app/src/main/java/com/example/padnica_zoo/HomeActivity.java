@@ -1,7 +1,12 @@
 package com.example.padnica_zoo;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.padnica_zoo.ui.slideshow.SlideshowFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -31,12 +36,31 @@ public class HomeActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_packages, R.id.nav_events, R.id.nav_cart)
+                R.id.nav_home, R.id.nav_packages, R.id.nav_events, R.id.nav_cart, R.id.nav_animals, R.id.nav_profile)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //Logout button
+        View headerView = navigationView.getHeaderView(0); // Get the header view at position 0 (the first and only one)
+        //setContentView(R.layout.nav_header_home); // Make sure to set the correct layout
+        Button logout = headerView.findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //clear username
+                SharedPreferences sharedPreferences = getSharedPreferences("logged", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                //navigate to login (Main Activity)
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

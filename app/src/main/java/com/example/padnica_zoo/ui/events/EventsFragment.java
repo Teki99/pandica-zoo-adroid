@@ -1,12 +1,11 @@
 package com.example.padnica_zoo.ui.events;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,21 +20,12 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import com.example.padnica_zoo.R;
-import com.google.gson.Gson;
-import com.pandica_zoo.models.AnimalList;
 import com.pandica_zoo.models.Event;
-import com.pandica_zoo.models.EventList;
 import com.pandica_zoo.models.JsonFile;
-import com.pandica_zoo.models.PackageList;
-import com.pandica_zoo.models.User;
-import com.pandica_zoo.models.UserList;
 import com.pandica_zoo.utils.AssetsUtils;
 import com.pandica_zoo.utils.TinyDB;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EventsFragment extends Fragment {
     private EventsViewModel viewModel;
@@ -60,15 +50,19 @@ public class EventsFragment extends Fragment {
     }
 
     private RelativeLayout createRelativeLayoutWithTextView(Application application, Event event) {
-        RelativeLayout relativeLayout = new RelativeLayout(application);
         Typeface customTypeface = ResourcesCompat.getFont(application, R.font.irish_grover);
-        relativeLayout.setBackgroundColor(ContextCompat.getColor(application, R.color.dark_green));
+        Drawable outlineLightGreen = ContextCompat.getDrawable(application, R.drawable.light_green_outline);
+
+        RelativeLayout relativeLayout = new RelativeLayout(application);
+        relativeLayout.setBackgroundResource(R.drawable.dark_green_outline);
+        relativeLayout.setBackgroundTintList(ContextCompat.getColorStateList(application, R.color.dark_green));
 
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                800,1200
+                850,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.topMargin = getResources().getDimensionPixelSize(R.dimen.top_margin);
-        layoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.bottom_margin);
+        layoutParams.topMargin = 20;
+        layoutParams.bottomMargin = 20;
 
         //DATE
         TextView date = new TextView(application);
@@ -76,12 +70,14 @@ public class EventsFragment extends Fragment {
         date.setId(View.generateViewId());
         date.setTextColor(ContextCompat.getColor(application, R.color.light_green));
         date.setTypeface(customTypeface);
+        date.setPadding(20,10,20,10);
 
         RelativeLayout.LayoutParams dateParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
         dateParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        dateParams.bottomMargin=10;
 
         //NAME
         TextView name = new TextView(application);
@@ -89,6 +85,8 @@ public class EventsFragment extends Fragment {
         name.setId(View.generateViewId());
         name.setTextColor(ContextCompat.getColor(application, R.color.white));
         name.setTypeface(customTypeface);
+        name.setTextSize(20);
+        name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         RelativeLayout.LayoutParams nameParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -96,6 +94,7 @@ public class EventsFragment extends Fragment {
         );
         nameParams.addRule(RelativeLayout.BELOW,date.getId());
         nameParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        nameParams.bottomMargin=10;
 
         //IMAGE
         ImageView image = new ImageView(this.getActivity());
@@ -124,6 +123,7 @@ public class EventsFragment extends Fragment {
         description.setId(View.generateViewId());
         description.setTextColor(ContextCompat.getColor(application, R.color.white));
         description.setTypeface(customTypeface);
+        description.setPadding(20,10,20,10);
 
         RelativeLayout.LayoutParams descriptionParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -135,7 +135,7 @@ public class EventsFragment extends Fragment {
         ImageButton likeButton = new ImageButton(this.getActivity().getApplication());
         //!!!need it here to be visible!
         TextView numOfLikes = new TextView(application);
-        likeButton.setImageResource(R.drawable.thumb_up);
+        likeButton.setImageResource(R.drawable.ic_like);
         if(!wasLiked.get(event.getId()-1)) //not liked
         {
             likeButton.setColorFilter(ContextCompat.getColor(application, R.color.white), PorterDuff.Mode.SRC_ATOP);
@@ -183,15 +183,20 @@ public class EventsFragment extends Fragment {
         //--------------------------------NUMBER OF LIKES-------------------------------------------
         numOfLikes.setText(""+event.getNumOfLikes()+"");
         numOfLikes.setId(View.generateViewId());
-        numOfLikes.setTextColor(ContextCompat.getColor(application, R.color.white));
+        numOfLikes.setTextColor(ContextCompat.getColor(application, R.color.light_green));
         numOfLikes.setTypeface(customTypeface);
+        numOfLikes.setTextSize(25);
+        numOfLikes.setBackground(outlineLightGreen);
+        numOfLikes.setPadding(20,10,20,10);
 
         RelativeLayout.LayoutParams numOfLikesParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
+                RelativeLayout.LayoutParams.MATCH_PARENT
         );
         numOfLikesParams.addRule(RelativeLayout.BELOW,description.getId());
         numOfLikesParams.addRule(RelativeLayout.RIGHT_OF,likeButton.getId());
+        numOfLikesParams.leftMargin=20;
+        numOfLikesParams.addRule(RelativeLayout.CENTER_VERTICAL);
 
         relativeLayout.addView(date, dateParams);
         relativeLayout.addView(name, nameParams);
