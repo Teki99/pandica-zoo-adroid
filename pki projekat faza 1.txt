@@ -1,0 +1,39 @@
+lični podaci:
+ime
+prezime
+kontakt telefon
+adresa
+za prijavljivanje:
+korisničko ime
+lozinka
+
+Za sve korisnike(Posetilac i Zaposleni):   NE POSTOJI NEREGISTROVANI KORISNIK? -> MORA PRVO LOGIN!
+
+stanica za login (korisnicko ime i lozinka)
+stranica za promenu licnih podataka ( samo ime, prezime, kontakt telefon, adresa, ovo je nakon sto se korisnik uloguje)
+stranica za promenu lozinke (ovo je nakon sto se korisnik uloguje)
+da li posebna stranica sa infromacijama o korisniku, a zatim posebne 2 stranice za pomenu? 
+-----------------------------------------------------------------------------------------------------
+
+Za posetilaca: (mobilna i web aplikacija)
+
+stranica za infromacija o dostupnim paketima u zooloskom vrtu (min 3)
+stranica za kupovinu ulaznice (individualne, grupne i paketi, mogucnost unosa promo koda za popust na ulaznicu)
+stranica sa infromacijama o desavanjima u zooloskom vrtu (min 5 razlicitih, za svaki slika, naziv i kratak opis)
+mogucnost lajkovanja odredjenog desavanja (prikazuje se trenutni broj lajkova)
+stranica o zivotinjama koje postoje u zooloskom vrtu ( vidi sve zivotinje, za svaku zivotinju ima slika i naziv, minimum 10 zivotinja u vrtu(bazi) i prikazano pomocu paginacije sa po 5 zivotinja na stranici, na mobilnom scrollable stranica dovoljno)
+stranica sa detaljima o izabranoj zivotinji(pored slike i naziva, ima opis zivotinje i komentari koji su ostavili drugi, posetilac moze da ostavi komentar)
+mogucnost ostavljanja komentara 
+stranica sa kontakt informacijama o vrtu
+stranica sa obavestenjima o statusu kupovine (azuriranje broja obavestenja ili samog obavestenja nakon refereshovanja stranice)
+
+
+-----------------------------------------------------------------------------------------------------
+
+Za zaposlenog: (samo web aplikacija)
+
+stranica sa zahtevima za kupovinu ulaznice (moze da je prihvati ili odbije)
+stranica za dodavanje novih zivotinja (tako sto unosi slike (neke od predefinisanih slika koje treba ubaciti u aplikaciju), naziv i opis)
+
+
+Baza nije neophodna, tako da je moguce cuvati podatke lokalno na izabrani nacin?? sta god ovo bilo
